@@ -4,14 +4,15 @@ IlluminateMyWords is a dynamic keyword highlighting tool that improves readabili
 
 ## Features
 
+- **Independent Utility**:
+  Functions independently of the terminal environment, providing flexibility across different platforms.
+
 ## ToDo
 
-- [] **Dynamic Highlighting**:
+- [ ] **Dynamic Highlighting**:
   Automatically highlights words based on a configurable set of rules.
-- [] **Customizable Patterns**:
+- [ ] **Customizable Patterns**:
   Users can define their own keywords and associated colors through a simple configuration file.
-- [] **Independent Utility**:
-  Functions independently of the terminal environment, providing flexibility across different platforms.
 
 ## Installation
 
@@ -20,6 +21,7 @@ IlluminateMyWords is a dynamic keyword highlighting tool that improves readabili
 ```bash
  git clone https://github.com/d0tiks/IlluminateMyWords.git
  cd IlluminateMyWords
+```
 
  2. Compile the sources
 
