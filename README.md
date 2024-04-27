@@ -16,7 +16,7 @@ IlluminateMyWords is a dynamic keyword highlighting tool that improves readabili
 - [ ] **Customizable Patterns**:
   Users can define their own keywords and associated colors through a simple configuration file.
 - [ ] Hot Reload:
-  Modification of the configuration is applied without to relaunch the tool.
+  Modification of the configuration is applied without needing to relaunch the tool.
 
 ## Installation
 
