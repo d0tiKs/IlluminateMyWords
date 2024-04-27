@@ -9,14 +9,19 @@ import (
 func initCLI() {
 	configFile := flag.String("conf", configutils.DEFAULT_CONFIG_FILE, "The configuration file to load.")
 	verbose := flag.Bool("verbose", false, "Enable debug logs.")
-
-	config := configutils.LoadConfig(configFile, verbose)
-
 	flag.Parse()
 
-	loggerutils.LogMessage(loggerutils.LOG_DEBUG, "config file: %s, verbosity: %v", *config.ConfigFile, *config.Verbose)
+	configutils.InitConfig(configFile, verbose)
+
+	loggerutils.LogMessage(loggerutils.LOG_DEBUG, "config file: %s, verbosity: %v", *configFile, *verbose)
 }
 
 func main() {
 	initCLI()
+
+	err := configutils.LoadConfig()
+	if err != nil {
+		loggerutils.LogMessage(loggerutils.LOG_ERROR, err.Error())
+		return
+	}
 }

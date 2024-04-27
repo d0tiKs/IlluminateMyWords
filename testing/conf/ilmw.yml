@@ -1,0 +1,24 @@
+types:
+  - name: errors
+    color: red
+    keywords:
+      - error
+      - fail
+      - ko
+      - not found
+  - name: warnings
+    color: orange
+    keywords:
+      - warning
+      - alert
+  - name: information
+    color: yellow
+    keywords:
+      - info
+      - notice
+  - name: success
+    color: green
+    keywords:
+      - info
+      - sucess
+      - ok
