@@ -4,18 +4,15 @@ IlluminateMyWords is a dynamic keyword highlighting tool that improves readabili
 
 ## Features
 
-- **Independent Utility**:
+- [x] **Independent Utility**:
   Functions independently of the terminal environment, providing flexibility across different platforms.
-- Configurable using Yaml:
+- [x] Configurable using Yaml:
   Allow a custom mapping between keywords and colors, by types.
-
-## ToDo
-
-- [ ] **Dynamic Highlighting**:
+- [x] **Dynamic Highlighting**:
   Automatically highlights words based on a configurable set of rules.
 - [x] **Customizable Patterns**:
   Users can define their own keywords and associated colors through a simple configuration file.
-- [ ] Hot Reload:
+- [ ] **Hot Reload**:
   Modification of the configuration is applied without needing to relaunch the tool.
 
 ## Installation
@@ -37,29 +34,36 @@ IlluminateMyWords is a dynamic keyword highlighting tool that improves readabili
 
   ```yaml
   types:
-    - name: errors
-      color: red
-      keywords:
-        - error
-        - fail
-        - ko
-        - not found
-    - name: warnings
-      color: orange
-      keywords:
-        - warning
-        - alert
-    - name: information
-      color: yellow
-      keywords:
-        - info
-        - notice
-    - name: success
-      color: green
-      keywords:
-        - info
-        - sucess
-        - ok
+  - name: errors
+    color: red
+    keywords:
+      - error(s)?
+      - fail(ed)?
+      - ko
+      - not found
+      - invalid
+  - name: warnings
+    color: orange
+    keywords:
+      - warning(s)?
+      - alert(s)?
+  - name: informations
+    color: cyan
+    keywords:
+      - info(rmation(s)?)?
+      - notice
+      - verbose
+  - name: successes
+    color: green
+    keywords:
+      - success
+      - succeded
+      - ok
+      - valid
+  - name: debug
+    color: yellow
+    keywords:
+      - debug
   ```
 
 4. Run the tool
