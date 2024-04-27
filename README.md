@@ -6,6 +6,8 @@ IlluminateMyWords is a dynamic keyword highlighting tool that improves readabili
 
 - **Independent Utility**:
   Functions independently of the terminal environment, providing flexibility across different platforms.
+- Configurable using Yaml:
+  Allow a custom mapping between keywords and colors, by types.
 
 ## ToDo
 
@@ -18,13 +20,48 @@ IlluminateMyWords is a dynamic keyword highlighting tool that improves readabili
 
 1. **Clone the repository**:
 
-```bash
- git clone https://github.com/d0tiks/IlluminateMyWords.git
- cd IlluminateMyWords
-```
+  ```bash
+  git clone https://github.com/d0tiks/IlluminateMyWords.git
+  cd IlluminateMyWords
+  ```
 
- 2. Compile the sources
+2. Compile the sources
 
-```bash
- go build -o ilmw /src/main.go
-```
+  ```bash
+  go build -o ilmw /src/main.go
+  ```
+
+3. Configure your Keyword Mapping
+
+  ```yaml
+  types:
+    - name: errors
+      color: red
+      keywords:
+        - error
+        - fail
+        - ko
+        - not found
+    - name: warnings
+      color: orange
+      keywords:
+        - warning
+        - alert
+    - name: information
+      color: yellow
+      keywords:
+        - info
+        - notice
+    - name: success
+      color: green
+      keywords:
+        - info
+        - sucess
+        - ok
+  ```
+
+4. Run the tool
+
+  ```bash
+  ./ilmw -conf your_config.yaml
+  ```
