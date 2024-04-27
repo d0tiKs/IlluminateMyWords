@@ -58,7 +58,7 @@ func InitConfig(conf *string, verbose *bool) (appConfig, error) {
 	}
 	filePath, err := filepath.Abs(*conf)
 	if err != nil {
-		return Config, errorsutils.BuildError(err, "error while at path '%s', see error below:", *conf)
+		return Config, errorsutils.BuildError(err, "error while at path '%s'", *conf)
 	}
 	Config.ConfigFile = filePath
 	return Config, nil
@@ -67,11 +67,11 @@ func InitConfig(conf *string, verbose *bool) (appConfig, error) {
 func LoadConfig() error {
 	file, err := os.ReadFile(Config.ConfigFile)
 	if err != nil {
-		return errorsutils.BuildError(err, "error while opening file '%s', see error below:", Config.ConfigFile)
+		return errorsutils.BuildError(err, "error while opening file '%s'", Config.ConfigFile)
 	}
 	err = yaml.Unmarshal(file, &Config.Mapping)
 	if err != nil {
-		return errorsutils.BuildError(err, "error while parsing the file '%s', see error below:", Config.ConfigFile)
+		return errorsutils.BuildError(err, "error while parsing the file '%s'", Config.ConfigFile)
 	}
 
 	return nil
