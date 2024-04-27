@@ -12,6 +12,7 @@ const (
 	STDOUT = 1
 	STDERR = 2
 
+	STAND_FD = STDERR
 	ERROR_FD = STDERR
 
 	// LOG LEVELS
@@ -29,10 +30,14 @@ func LogMessage(logLevel string, format string, vargs ...interface{}) (n int, er
 	logLevelToken := fmt.Sprintf("[%s] ", logLevel)
 	message := fmt.Sprintf(format, vargs...)
 
-	outfd := os.Stdout
+	outfd := os.Stderr
 
-	if ERROR_FD != STDOUT && logLevel != LOG_INFO {
+	switch STAND_FD {
+	case STDERR:
 		outfd = os.Stderr
+	case STDOUT:
+	default:
+		outfd = os.Stdout
 	}
 
 	return fmt.Fprintln(outfd, logLevelToken+message)
