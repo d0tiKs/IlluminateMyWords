@@ -2,23 +2,30 @@ types:
   - name: errors
     color: red
     keywords:
-      - error
-      - fail
+      - error(s)?
+      - fail(ed)?
       - ko
       - not found
+      - invalid
   - name: warnings
     color: orange
     keywords:
-      - warning
-      - alert
-  - name: information
-    color: yellow
+      - warning(s)?
+      - alert(s)?
+  - name: informations
+    color: cyan
     keywords:
-      - info
+      - info(rmation(s)?)?
       - notice
-  - name: success
+      - verbose
+  - name: successes
     color: green
     keywords:
-      - info
-      - sucess
+      - success
+      - succeded
       - ok
+      - valid
+  - name: debug
+    color: yellow
+    keywords:
+      - debug

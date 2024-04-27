@@ -5,30 +5,32 @@ import (
 	"os"
 	"path/filepath"
 
+	"github.com/fatih/color"
 	"gopkg.in/yaml.v3"
 )
 
 const (
 	DEFAULT_CONFIG_FILE = ".ilmw.yml"
+	DEFAULT_COLOR       = "white"
 )
 
-var ColorCode = map[string]string{
-	"black":         "30",
-	"red":           "31",
-	"green":         "32",
-	"yellow":        "33",
-	"blue":          "34",
-	"magenta":       "35",
-	"cyan":          "36",
-	"light gray":    "37",
-	"dark gray":     "90",
-	"light red":     "91",
-	"light green":   "92",
-	"light yellow":  "93",
-	"light blue":    "94",
-	"light magenta": "95",
-	"light cyan":    "96",
-	"white":         "97",
+var ColorCode = map[string]color.Attribute{
+	"black":         color.FgBlack,
+	"red":           color.FgRed,
+	"green":         color.FgGreen,
+	"yellow":        color.FgYellow,
+	"blue":          color.FgBlue,
+	"magenta":       color.FgMagenta,
+	"cyan":          color.FgCyan,
+	"light gray":    color.FgHiWhite,
+	"dark gray":     color.FgHiBlack,
+	"light red":     color.FgHiRed,
+	"light green":   color.FgHiGreen,
+	"light yellow":  color.FgHiYellow,
+	"light blue":    color.FgHiBlue,
+	"light magenta": color.FgHiMagenta,
+	"light cyan":    color.FgHiCyan,
+	"white":         color.FgWhite,
 }
 
 var Config appConfig
@@ -77,7 +79,7 @@ func LoadConfig() error {
 
 	Config.Rules = make(map[string]MatchingRule)
 	for _, t := range Config.Mapping.Types {
-		mr, err := createRule(&t.Keywords)
+		mr, err := CreateRule(&t.Keywords, t.Color)
 		if err != nil {
 			errorFactory.BuildAndLogError(err, "erorr while building rule for '%s'", t.Name)
 		}

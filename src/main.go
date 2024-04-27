@@ -2,11 +2,13 @@ package main
 
 import (
 	"IlluminateMyWords/src/config"
+	"IlluminateMyWords/src/highlights"
 	"IlluminateMyWords/src/utils/logger"
 	"flag"
+	"os"
 )
 
-func initCLI() {
+func InitCLI() {
 	configFile := flag.String("conf", config.DEFAULT_CONFIG_FILE, "The configuration file to load.")
 	verbose := flag.Bool("verbose", false, "Enable debug logs.")
 	flag.Parse()
@@ -18,11 +20,13 @@ func initCLI() {
 }
 
 func main() {
-	initCLI()
+	InitCLI()
 
 	err := config.LoadConfig()
 	if err != nil {
 		logger.LogMessage(logger.LOG_ERROR, err.Error())
 		return
 	}
+
+	highlights.ColorizeStream(os.Stdin)
 }

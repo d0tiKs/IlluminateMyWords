@@ -6,8 +6,9 @@ import (
 )
 
 type MatchingRule struct {
-	regex *regexp.Regexp
+	Regex *regexp.Regexp
 	rule  string
+	Color string
 }
 
 type RuleSet map[string]MatchingRule
@@ -15,18 +16,19 @@ type RuleSet map[string]MatchingRule
 func (rs RuleSet) Reset() {
 }
 
-func createRule(keywords *[]string) (MatchingRule, error) {
+func CreateRule(keywords *[]string, color string) (MatchingRule, error) {
 	var rule string
 	size := len(*keywords)
 
 	if size == 0 {
 		return MatchingRule{
-			regex: nil,
+			Regex: nil,
 			rule:  "",
+			Color: color,
 		}, nil
 	}
 
-	rule = "(" + (*keywords)[0]
+	rule = "(?i)(" + (*keywords)[0]
 
 	for i := 1; i < size; i++ {
 		rule += "|" + (*keywords)[i]
@@ -37,16 +39,15 @@ func createRule(keywords *[]string) (MatchingRule, error) {
 	regex, err := regexp.Compile(rule)
 	if err != nil {
 		return MatchingRule{
-			regex: nil,
+			Regex: nil,
 			rule:  rule,
+			Color: color,
 		}, errorFactory.BuildError(err, "")
 	}
 
 	return MatchingRule{
-		regex: regex,
+		Regex: regex,
 		rule:  rule,
+		Color: color,
 	}, nil
-}
-
-func (mr *MatchingRule) Evaluate() {
 }
