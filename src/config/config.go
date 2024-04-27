@@ -1,7 +1,7 @@
-package configutils
+package config
 
 import (
-	errorsutils "IlluminateMyWords/src/utils/errors"
+	errorFactory "IlluminateMyWords/src/utils/errors"
 	"os"
 	"path/filepath"
 
@@ -58,7 +58,7 @@ func InitConfig(conf *string, verbose *bool) (appConfig, error) {
 	}
 	filePath, err := filepath.Abs(*conf)
 	if err != nil {
-		return Config, errorsutils.BuildError(err, "error while at path '%s'", *conf)
+		return Config, errorFactory.BuildError(err, "error while at path '%s'", *conf)
 	}
 	Config.ConfigFile = filePath
 	return Config, nil
@@ -67,11 +67,11 @@ func InitConfig(conf *string, verbose *bool) (appConfig, error) {
 func LoadConfig() error {
 	file, err := os.ReadFile(Config.ConfigFile)
 	if err != nil {
-		return errorsutils.BuildError(err, "error while opening file '%s'", Config.ConfigFile)
+		return errorFactory.BuildError(err, "error while opening file '%s'", Config.ConfigFile)
 	}
 	err = yaml.Unmarshal(file, &Config.Mapping)
 	if err != nil {
-		return errorsutils.BuildError(err, "error while parsing the file '%s'", Config.ConfigFile)
+		return errorFactory.BuildError(err, "error while parsing the file '%s'", Config.ConfigFile)
 	}
 
 	return nil

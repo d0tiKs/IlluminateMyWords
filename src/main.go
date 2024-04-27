@@ -1,27 +1,28 @@
 package main
 
 import (
-	configutils "IlluminateMyWords/src/utils/config"
-	loggerutils "IlluminateMyWords/src/utils/logger"
+	"IlluminateMyWords/src/config"
+	"IlluminateMyWords/src/utils/logger"
 	"flag"
 )
 
 func initCLI() {
-	configFile := flag.String("conf", configutils.DEFAULT_CONFIG_FILE, "The configuration file to load.")
+	configFile := flag.String("conf", config.DEFAULT_CONFIG_FILE, "The configuration file to load.")
 	verbose := flag.Bool("verbose", false, "Enable debug logs.")
 	flag.Parse()
 
-	configutils.InitConfig(configFile, verbose)
+	config.InitConfig(configFile, verbose)
 
-	loggerutils.LogMessage(loggerutils.LOG_DEBUG, "config file: %s, verbosity: %v", *configFile, *verbose)
+	logger.InitLogger(verbose, logger.STAND_FD)
+	logger.LogMessage(logger.LOG_DEBUG, "config file: %s, verbosity: %v", *configFile, *verbose)
 }
 
 func main() {
 	initCLI()
 
-	err := configutils.LoadConfig()
+	err := config.LoadConfig()
 	if err != nil {
-		loggerutils.LogMessage(loggerutils.LOG_ERROR, err.Error())
+		logger.LogMessage(logger.LOG_ERROR, err.Error())
 		return
 	}
 }
