@@ -26,7 +26,7 @@ type LogConfig struct {
 	outfd   *os.File
 }
 
-var logconfig *LogConfig
+var logconfig LogConfig
 
 func InitLogger(verbose *bool, outfd int) {
 	logconfig.verbose = verbose
