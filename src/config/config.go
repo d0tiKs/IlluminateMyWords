@@ -42,8 +42,9 @@ type KeywordsMapping struct {
 }
 
 type appConfig struct {
-	ConfigFile string
 	Verbose    *bool
+	ConfigFile string
+	Rules      map[string]MatchingRule
 	Mapping    KeywordsMapping
 }
 
@@ -72,6 +73,15 @@ func LoadConfig() error {
 	err = yaml.Unmarshal(file, &Config.Mapping)
 	if err != nil {
 		return errorFactory.BuildError(err, "error while parsing the file '%s'", Config.ConfigFile)
+	}
+
+	Config.Rules = make(map[string]MatchingRule)
+	for _, t := range Config.Mapping.Types {
+		mr, err := createRule(&t.Keywords)
+		if err != nil {
+			errorFactory.BuildAndLogError(err, "erorr while building rule for '%s'", t.Name)
+		}
+		Config.Rules[t.Name] = mr
 	}
 
 	return nil
