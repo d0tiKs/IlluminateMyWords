@@ -59,7 +59,7 @@ IlluminateMyWords is a dynamic keyword highlighting tool that improves readabili
       - success
       - succeded
       - ok
-      - valid
+      - (?<!in)valid
   - name: debug
     color: yellow
     keywords:

@@ -8,7 +8,7 @@ types:
       - not found
       - invalid
   - name: warnings
-    color: orange
+    color: yellow
     keywords:
       - warning(s)?
       - alert(s)?
@@ -24,8 +24,8 @@ types:
       - success
       - succeded
       - ok
-      - valid
+      - (?<!in)valid
   - name: debug
-    color: yellow
+    color: magenta
     keywords:
       - debug

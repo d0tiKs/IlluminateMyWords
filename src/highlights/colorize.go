@@ -2,10 +2,12 @@ package highlights
 
 import (
 	"IlluminateMyWords/src/config"
+	errorfactory "IlluminateMyWords/src/utils/errors"
 	"bufio"
 	"fmt"
 	"io"
-	"regexp"
+
+	regexp "github.com/dlclark/regexp2"
 
 	"github.com/fatih/color"
 )
@@ -22,7 +24,12 @@ func ColorizeKeyword(keyword string, colorname string) string {
 }
 
 func ColorizeLine(line string, regex *regexp.Regexp, color string) string {
-	return regex.ReplaceAllString(line, ColorizeKeyword("$1", color))
+	newline, err := regex.Replace(line, ColorizeKeyword("$1", color), -1, -1)
+	if err != nil {
+		errorfactory.BuildAndLogError(err, "error while replacing with colored keywords")
+		return line
+	}
+	return newline
 }
 
 func ColorizeStream(reader io.Reader) {

@@ -2,7 +2,8 @@ package config
 
 import (
 	errorFactory "IlluminateMyWords/src/utils/errors"
-	"regexp"
+
+	regexp "github.com/dlclark/regexp2"
 )
 
 type MatchingRule struct {
@@ -36,7 +37,7 @@ func CreateRule(keywords *[]string, color string) (MatchingRule, error) {
 
 	rule += ")"
 
-	regex, err := regexp.Compile(rule)
+	regex, err := regexp.Compile(rule, regexp.IgnoreCase)
 	if err != nil {
 		return MatchingRule{
 			Regex: nil,
